@@ -25,7 +25,7 @@ class AuthController extends CustomController
             if ($this->isAuth($credentials)) {
                 return redirect('/dashboard');
             }
-            return redirect()->back()->withInput()->with('failed', 'Periksa Kembali Username dan Password Anda');
+            return redirect()->back()->with('failed', 'Periksa Kembali Username dan Password Anda');
         }
         return view('login');
     }

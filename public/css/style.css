@@ -11,3 +11,8 @@
 .f-bold {
     font-weight: bold;
 }
+
+.breadcrumb-transparent {
+    padding: 0 0;
+    background-color: inherit;
+}

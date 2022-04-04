@@ -16,4 +16,9 @@ class Odc extends Model
         'latitude',
         'longitude',
     ];
+
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class);
+    }
 }
