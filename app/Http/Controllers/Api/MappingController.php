@@ -58,4 +58,17 @@ class MappingController extends CustomController
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
     }
+
+    public function get_data_by_region()
+    {
+        $region = $this->request->query->get('region');
+        try {
+            $data = Odc::with('wilayah')
+                ->where('wilayah_id', '=', $region)
+                ->get();
+            return $this->jsonResponse('success', 200, $data);
+        }catch (\Exception $e) {
+            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
+        }
+    }
 }

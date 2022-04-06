@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+
+Route::group(['prefix' => 'mapping', 'middleware' => 'auth:api'], function () {
+    Route::get('/', [\App\Http\Controllers\Api\MappingController::class, 'get_data_by_region']);
 });
