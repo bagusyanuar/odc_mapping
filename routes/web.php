@@ -32,3 +32,5 @@ Route::group(['prefix' => 'odc'], function (){
     Route::post('/create', [\App\Http\Controllers\ODCController::class, 'create']);
     Route::post('/patch', [\App\Http\Controllers\ODCController::class, 'patch']);
 });
+
+Route::get('/mapping', [\App\Http\Controllers\Api\MappingController::class, 'get_haversine_data']);
