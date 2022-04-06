@@ -44,6 +44,8 @@ class MappingController extends CustomController
                 $destination_longitude = $value->longitude;
                 $tmp['id'] = $value->id;
                 $tmp['name'] = $value->nama;
+                $tmp['latitude'] = $value->latitude;
+                $tmp['longitude'] = $value->longitude;
                 $tmp['distance'] = $this->haversine_formula($current_latitude, $current_longitude, $destination_latitude, $destination_longitude);
                 array_push($results, $tmp);
             }
