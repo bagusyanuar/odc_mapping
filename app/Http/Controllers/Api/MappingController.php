@@ -50,7 +50,7 @@ class MappingController extends CustomController
                 array_push($results, $tmp);
             }
 
-            usort($results, function ($a, $b){
+            usort($results, function ($a, $b) {
                 return $a['distance'] > $b['distance'];
             });
             return $this->jsonResponse('success', 200, $results);
@@ -67,7 +67,35 @@ class MappingController extends CustomController
                 ->where('wilayah_id', '=', $region)
                 ->get();
             return $this->jsonResponse('success', 200, $data);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
+            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
+        }
+    }
+
+    public function get_data_by_name()
+    {
+        $name = $this->request->query->get('name');
+        try {
+            $data = Odc::with('wilayah')
+                ->where('nama', 'LIKE', '%' . $name . '%')
+                ->get();
+            return $this->jsonResponse('success', 200, $data);
+        } catch (\Exception $e) {
+            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
+        }
+    }
+
+    public function get_detail_odc($id)
+    {
+        try {
+            $data = Odc::with('wilayah')
+                ->where('id', '=', $id)
+                ->first();
+            if (!$data) {
+                return $this->jsonResponse('ODC Not Found', 202);
+            }
+            return $this->jsonResponse('success', 200, $data);
+        } catch (\Exception $e) {
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
     }

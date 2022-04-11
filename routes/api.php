@@ -23,3 +23,6 @@ Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']
 Route::group(['prefix' => 'mapping', 'middleware' => 'auth:api'], function () {
     Route::get('/', [\App\Http\Controllers\Api\MappingController::class, 'get_data_by_region']);
 });
+
+Route::get('/odc', [\App\Http\Controllers\Api\MappingController::class, 'get_data_by_name']);
+Route::get('/odc/{id}', [\App\Http\Controllers\Api\MappingController::class, 'get_detail_odc']);
