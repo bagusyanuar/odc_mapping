@@ -26,3 +26,4 @@ Route::group(['prefix' => 'mapping', 'middleware' => 'auth:api'], function () {
 
 Route::get('/odc', [\App\Http\Controllers\Api\MappingController::class, 'get_data_by_name']);
 Route::get('/odc/{id}', [\App\Http\Controllers\Api\MappingController::class, 'get_detail_odc']);
+Route::get('/mapping', [\App\Http\Controllers\Api\MappingController::class, 'get_haversine_data']);

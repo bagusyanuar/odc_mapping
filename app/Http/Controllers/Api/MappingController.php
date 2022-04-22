@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helper\CustomController;
 use App\Models\Odc;
+use LDAP\Result;
 
 class MappingController extends CustomController
 {
@@ -35,8 +36,8 @@ class MappingController extends CustomController
     {
         try {
             $data = Odc::all();
-            $current_latitude = -7.558738272497111;
-            $current_longitude = 110.85658736739866;
+            $current_latitude = $this->field('latitude') ?? -7.558738272497111;
+            $current_longitude = $this->field('longitude') ?? 110.85658736739866;
 
             $results = [];
             foreach ($data as $value) {
@@ -53,7 +54,11 @@ class MappingController extends CustomController
             usort($results, function ($a, $b) {
                 return $a['distance'] > $b['distance'];
             });
-            return $this->jsonResponse('success', 200, $results);
+
+            if(count($results) <= 0) {
+                return $this->jsonResponse('No ODC Found!', 202);
+            }
+            return $this->jsonResponse('success', 200, $results[0]);
         } catch (\Exception $e) {
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
