@@ -104,4 +104,15 @@ class MappingController extends CustomController
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
     }
+
+    public function get_all_odc_location()
+    {
+        try {
+            $data = Odc::with('wilayah')
+                ->get();
+            return $this->jsonResponse('success', 200, $data);
+        }catch (\Exception $e) {
+            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
+        }
+    }
 }

@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::match(['post', 'get'],'/', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::match(['post', 'get'], '/', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::get('/dashboard', [\App\Http\Controllers\MainController::class, 'index']);
 
-Route::group(['prefix' => 'wilayah'], function (){
+Route::group(['prefix' => 'wilayah'], function () {
     Route::get('/', [\App\Http\Controllers\WilayahController::class, 'index']);
     Route::get('/tambah', [\App\Http\Controllers\WilayahController::class, 'add_page']);
     Route::get('/edit/{id}', [\App\Http\Controllers\WilayahController::class, 'edit_page']);
@@ -25,7 +25,7 @@ Route::group(['prefix' => 'wilayah'], function (){
     Route::post('/patch', [\App\Http\Controllers\WilayahController::class, 'patch']);
 });
 
-Route::group(['prefix' => 'odc'], function (){
+Route::group(['prefix' => 'odc'], function () {
     Route::get('/', [\App\Http\Controllers\ODCController::class, 'index']);
     Route::get('/tambah', [\App\Http\Controllers\ODCController::class, 'add_page']);
     Route::get('/edit/{id}', [\App\Http\Controllers\ODCController::class, 'edit_page']);
@@ -34,3 +34,6 @@ Route::group(['prefix' => 'odc'], function (){
 });
 
 Route::get('/mapping', [\App\Http\Controllers\Api\MappingController::class, 'get_haversine_data']);
+Route::get('/sample-map', function () {
+    return view('sample-map');
+});Route::get('/sample-map/data', [\App\Http\Controllers\Api\MappingController::class, 'get_all_odc_location']);
