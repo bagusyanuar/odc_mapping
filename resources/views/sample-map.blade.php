@@ -31,11 +31,11 @@
             zoom: 13
         });
 
-        // new google.maps.Marker({
-        //     position: myLatLng,
-        //     map,
-        //     title: "Hello World!",
-        // });
+        new google.maps.Marker({
+            position: myLatLng,
+            map,
+            title: "Hello World!",
+        });
     }
 
     async function getAllLocation() {
@@ -66,6 +66,7 @@
             map,
             title: "Hello World!",
             icon: svgMarkerUser,
+            label: 'Unit SDI'
         });
         try {
             let response = await $.get('/sample-map/data');
@@ -77,6 +78,7 @@
                     map,
                     title: "Hello World!",
                     icon: svgMarkerODC,
+                    label: {text: v['nama'], color: "green", fontWeight: "bold"}
                 });
             });
             console.log(response);
@@ -86,7 +88,7 @@
     }
 
     $(document).ready(function () {
-        initMap();
+        // initMap();
         getAllLocation();
     })
 </script>

@@ -14,6 +14,6 @@ class MainController extends CustomController
     }
 
     public function index() {
-        return view('base');
+        return view('dashboard');
     }
 }

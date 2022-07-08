@@ -17,6 +17,15 @@ Route::match(['post', 'get'], '/', [\App\Http\Controllers\AuthController::class,
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::get('/dashboard', [\App\Http\Controllers\MainController::class, 'index']);
 
+Route::group(['prefix' => 'pengguna'], function () {
+    Route::get('/', [\App\Http\Controllers\UsersController::class, 'index']);
+    Route::get('/tambah', [\App\Http\Controllers\UsersController::class, 'add_page']);
+    Route::get('/edit/{id}', [\App\Http\Controllers\UsersController::class, 'edit_page']);
+    Route::post('/create', [\App\Http\Controllers\UsersController::class, 'create']);
+    Route::post('/patch', [\App\Http\Controllers\UsersController::class, 'patch']);
+    Route::post('/delete', [\App\Http\Controllers\UsersController::class, 'destroy']);
+});
+
 Route::group(['prefix' => 'wilayah'], function () {
     Route::get('/', [\App\Http\Controllers\WilayahController::class, 'index']);
     Route::get('/tambah', [\App\Http\Controllers\WilayahController::class, 'add_page']);
