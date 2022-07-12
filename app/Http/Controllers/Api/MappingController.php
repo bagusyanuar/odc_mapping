@@ -70,14 +70,14 @@ class MappingController extends CustomController
                 array_push($results, $tmp);
             }
 
-//            usort($results, function ($a, $b) {
-//                return $a['distance'] > $b['distance'];
-//            });
+            usort($results, function ($a, $b) {
+                return $a['distance'] > $b['distance'];
+            });
 
             if(count($results) <= 0) {
                 return $this->jsonResponse('No ODC Found!', 202);
             }
-            return $this->jsonResponse('success', 200, $results);
+            return $this->jsonResponse('success', 200, $results[0]);
         } catch (\Exception $e) {
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
