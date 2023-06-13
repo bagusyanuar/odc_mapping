@@ -36,14 +36,13 @@ class UsersController extends CustomController
             ];
             User::create($data);
             return redirect()->back()->with(['success' => 'Berhasil Menambahkan Data...']);
-        }catch (\Exception $e) {
-            return redirect()->back()->with(['failed' => 'Terjadi Kesalahan' . $e->getMessage()]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['failed' => 'Terjadi Kesalahan ' . $e->getMessage()]);
         }
     }
 
     public function edit_page($id)
     {
-
         $data = User::findOrFail($id);
         return view('admin.edit')->with(['data' => $data]);
     }
@@ -55,7 +54,7 @@ class UsersController extends CustomController
             $user = User::find($id);
             $data = [
                 'username' => $this->postField('username'),
-                'role' => $this->postField('role')
+                'role' => $this->postField('role'),
             ];
 
             if ($this->postField('password') !== '') {

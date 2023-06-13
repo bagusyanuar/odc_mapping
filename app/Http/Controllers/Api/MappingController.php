@@ -25,10 +25,27 @@ class MappingController extends CustomController
         $long_to = deg2rad($long2);
         $delta_lat = $lat_to - $lat_from;
         $delta_long = $long_to - $long_from;
-        $angle = 2 * asin(sqrt(pow(sin($delta_lat), 2) + cos($lat_from) * cos($lat_to) * pow(sin($delta_long), 2)));
+        $angle = 2 * asin(sqrt(pow(sin($delta_lat / 2), 2) + cos($lat_from) * cos($lat_to) * pow(sin($delta_long / 2), 2)));
 //        $a = sin($delta_lat / 2) * sin($delta_lat / 2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($delta_long / 2) * sin($delta_long / 2);
 //        $c = 2 * asin(sqrt($a));
-        return $earth_radius * $angle;
+        $distance = $earth_radius * $angle;
+
+        return [
+            'distance' => $distance,
+            'lat_from' => $lat_from,
+            'lat_to' => $lat_to,
+            'long_from' => $long_from,
+            'long_to' => $long_to,
+            'delta_lat' => $delta_lat,
+            'delta_long' => $delta_long,
+            'angle' => $angle,
+            'pow_lat' => pow(sin($delta_lat / 2), 2),
+            'pow_long' => pow(sin($delta_long / 2), 2),
+            'cos_lat_from' => cos($lat_from),
+            'cos_lat_to' => cos($lat_to),
+            'sqrt' => sqrt(pow(sin($delta_lat / 2), 2) + cos($lat_from) * cos($lat_to) * pow(sin($delta_long / 2), 2)),
+            'pre_sqrt' => pow(sin($delta_lat / 2), 2) + cos($lat_from) * cos($lat_to) * pow(sin($delta_long / 2), 2)
+        ];
     }
 
 
@@ -43,11 +60,13 @@ class MappingController extends CustomController
             foreach ($data as $value) {
                 $destination_latitude = $value->latitude;
                 $destination_longitude = $value->longitude;
+                $res = $this->haversine_formula($current_latitude, $current_longitude, $destination_latitude, $destination_longitude);
                 $tmp['id'] = $value->id;
                 $tmp['name'] = $value->nama;
                 $tmp['latitude'] = $value->latitude;
                 $tmp['longitude'] = $value->longitude;
-                $tmp['distance'] = $this->haversine_formula($current_latitude, $current_longitude, $destination_latitude, $destination_longitude);
+                $tmp['h_data'] = $res;
+                $tmp['distance'] = $res['distance'];
                 array_push($results, $tmp);
             }
 
@@ -101,6 +120,17 @@ class MappingController extends CustomController
             }
             return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
+            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
+        }
+    }
+
+    public function get_all_odc_location()
+    {
+        try {
+            $data = Odc::with('wilayah')
+                ->get();
+            return $this->jsonResponse('success', 200, $data);
+        }catch (\Exception $e) {
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
     }

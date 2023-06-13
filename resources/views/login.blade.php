@@ -31,7 +31,7 @@
                             <input type="text" class="form-control" id="username" placeholder="Username" name="username">
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="password" class="form-label">Email address</label>
+                            <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                         </div>
                         <div class="w-100 mb-2 mt-3">

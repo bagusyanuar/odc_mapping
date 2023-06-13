@@ -41,6 +41,7 @@
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="username" placeholder="Username"
                                            name="username" value="{{ $data->username }}" required>
+
                                 </div>
                                 <div class="w-100 mb-1">
                                     <label for="password" class="form-label">Password</label>

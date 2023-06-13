@@ -28,8 +28,17 @@
                     <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pengguna</a>
+                    <a class="nav-link active" aria-current="page" href="/pengguna">Pengguna</a>
                 </li>
+{{--                <li class="nav-item dropdown">--}}
+{{--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">--}}
+{{--                        Pengguna--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+{{--                        <a class="dropdown-item" href="/admin">Admin</a>--}}
+{{--                        <a class="dropdown-item" href="/sdi">Unit SDI</a>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Data
