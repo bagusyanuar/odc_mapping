@@ -21,4 +21,9 @@ class Odc extends Model
     {
         return $this->belongsTo(Wilayah::class);
     }
+
+    public function kml_history()
+    {
+        return $this->hasMany(KMLHistory::class, 'odc_id');
+    }
 }

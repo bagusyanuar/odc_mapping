@@ -39,6 +39,8 @@
                         <td>{{ $v->nama }}</td>
                         <td class="text-center">
                             <a href="/wilayah/edit/{{ $v->id }}" class="btn btn-sm btn-warning btn-edit" data-id="{{ $v->id }}"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="{{ $v->id }}"><i
+                                    class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -50,9 +52,30 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('/js/helper.js') }}"></script>
     <script type="text/javascript">
+        function destroy(id) {
+            AjaxPost('/wilayah/destroy', {id}, function () {
+                window.location.reload();
+            });
+        }
+
+        function eventDelete() {
+            $('.btn-delete').on('click', function (e) {
+                e.preventDefault();
+                let id = this.dataset.id;
+                AlertConfirm('Yakin Ingin Menghapus Data', 'Data yang di hapus tidak dapat di kembalikan', function () {
+                    destroy(id);
+                })
+            });
+        }
         $(document).ready(function () {
-            $('#table-data').DataTable();
+            $('#table-data').DataTable({
+                "fnDrawCallback": function (setting) {
+                    eventDelete();
+                }
+            });
+            eventDelete();
         });
     </script>
 @endsection

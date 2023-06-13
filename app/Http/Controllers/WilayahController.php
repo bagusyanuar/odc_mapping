@@ -59,4 +59,15 @@ class WilayahController extends CustomController
             return redirect()->back()->with(['failed' => 'Terjadi Kesalahan' . $e->getMessage()]);
         }
     }
+
+    public function destroy()
+    {
+        try {
+            $id = $this->postField('id');
+            Wilayah::destroy($id);
+            return $this->jsonResponse('success', 200);
+        }catch (\Exception $e) {
+            return $this->jsonResponse('failed', 500);
+        }
+    }
 }

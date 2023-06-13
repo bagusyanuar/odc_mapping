@@ -37,6 +37,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/wilayah">Wilayah</a>
                         <a class="dropdown-item" href="/odc">ODC</a>
+                        <a class="dropdown-item" href="/kml-history">KML History</a>
                     </div>
                 </li>
             </ul>
