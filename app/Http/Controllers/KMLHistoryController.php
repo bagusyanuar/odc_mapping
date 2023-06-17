@@ -38,6 +38,7 @@ class KMLHistoryController extends CustomController
 
             if ($nama_file !== '') {
                 $data['url'] = '/assets/kml/' . $nama_file;
+                $data['file_name'] =  $nama_file;
                 $this->uploadImage('file', $nama_file, 'kml');
             }
             KMLHistory::create($data);

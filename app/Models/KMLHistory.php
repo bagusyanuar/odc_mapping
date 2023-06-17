@@ -14,7 +14,8 @@ class KMLHistory extends Model
     protected $fillable = [
         'odc_id',
         'user_id',
-        'url'
+        'url',
+        'file_name',
     ];
 
     public function odc()
